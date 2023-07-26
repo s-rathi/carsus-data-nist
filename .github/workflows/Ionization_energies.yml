@@ -31,7 +31,12 @@ jobs:
         run: pip install jupyter
 
       - name: Convert Jupyter Notebook to HTML
-        run: jupyter nbconvert --to html your_notebook.ipynb
+        run: jupyter nbconvert --to html ionization.ipynb
+        
+      - name: Save Output to File
+        run: | 
+          pre_text_data=$(jupyter nbconvert --stdout --to script your_notebook.ipynb | python -c "import sys; sys.stdout.write(sys.stdin.read())")
+          echo "$pre_text_data" > ionization_energies.txt
           
       - name: Compare changes
         id: compare
