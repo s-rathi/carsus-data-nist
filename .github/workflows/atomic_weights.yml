@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   
 env:
-  ATOMIC_WEIGHTS_URL: 'http://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl'        #URL of the NIST ionization energies
+  ATOMIC_WEIGHTS_URL: 'http://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl'        #URL of the NIST atomic weights
 
 
 jobs:
