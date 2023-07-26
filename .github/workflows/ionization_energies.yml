@@ -1,0 +1,60 @@
+name: Check NIST ionization energies
+
+on:
+#  schedule:
+ #   - cron: '0 0 * * 0'  #runs on every Sunday midnight
+  workflow_dispatch:
+  
+env:
+  IONIZATION_ENERGIES_URL: 'https://physics.nist.gov/cgi-bin/ASD/ie.pl'        #URL of the NIST ionization energies
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:    
+      - name: Checkout github repo
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Configure git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        
+      - name: Install Jupyter
+        run: pip install jupyter
+
+      - name: Convert Jupyter Notebook to HTML
+        run: jupyter nbconvert --to html ionization.ipynb
+        
+      - name: Save Output to File
+        run: | 
+          pre_text_data=$(jupyter nbconvert --stdout --to script your_notebook.ipynb | python -c "import sys; sys.stdout.write(sys.stdin.read())")
+          echo "$pre_text_data" > ionization_energies.txt
+          
+      - name: Compare changes
+        id: compare
+        continue-on-error: true
+        run: |
+          git add .
+          git diff --quiet --exit-code --cached
+
+      - name: Commit files to git
+        id: commit_changes
+        if: ${{ steps.compare.outcome == 'failure' }}
+        run: |
+          git commit -m "Ionization energies added"
+
+      - name: Push changes
+        if: ${{ steps.compare.outcome == 'failure' }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          
