@@ -68,7 +68,7 @@ for row in rows:
 table_data = [row for row in table_data if len(row) > 1]
 
 # Convert the table data into a DataFrame
-column=['At. Num', 'Ion Charge', 'El. Name', 'Ground Shells', 'Ground Level', 'Ionization Energy (eV)', 'Uncertainty (eV)']
+column=['At. Num', 'Ion Charge', 'El. Name', 'Ground Shells', 'Ground Level', 'Ionization Energy (eV)', 'Uncertainty (eV)','x']
 df = pd.DataFrame(table_data[2:], columns=column)
 df = df.drop(df.columns[-1], axis=1)
 
