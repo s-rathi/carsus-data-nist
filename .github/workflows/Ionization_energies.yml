@@ -19,7 +19,7 @@ jobs:
       - uses: act10ns/slack@v2.0.0
         with:
           status: starting
-          message: Starting Check Kurucz data workflow
+          message: Starting NISt ionization energies
         if: always()
         
       - name: Checkout github repo
