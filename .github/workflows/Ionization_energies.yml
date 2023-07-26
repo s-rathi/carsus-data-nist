@@ -35,16 +35,10 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v3
         
-      - name: Install Jupyter
-        run: pip install jupyter
-        
       - name: Install dependencies
         run: | 
           pip install -r requirements.txt
           pip install html5lib 
-
-   #   - name: Convert Jupyter Notebook to HTML
-   #     run: jupyter nbconvert --to html ionization.ipynb
         
       - name: Run Python script
         run: | 
