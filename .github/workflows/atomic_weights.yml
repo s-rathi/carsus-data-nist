@@ -33,17 +33,17 @@ jobs:
           git config --global user.email "actions@github.com"
           
       - name: Set up Python
-        id: set up python
+        id: set_python
         uses: actions/setup-python@v3
         
       - name: Install dependencies
-        id: install dependencies
+        id: install_dependencies
         run: | 
           pip install -r requirements.txt
           pip install html5lib 
         
       - name: Run Python script
-        id: run python script to download the data
+        id: run_script
         run: | 
           python atomic_weights.py
           
