@@ -68,7 +68,9 @@ for row in rows:
 table_data = [row for row in table_data if len(row) > 1]
 
 # Convert the table data into a DataFrame
-df = pd.DataFrame(table_data[1:], columns=table_data[0])
+columns=['At. Num', 'Ion Charge', 'El. Name', 'Ground Shells', 'Ground Level', 'Ionization Energy (eV)', 'Uncertainty (eV)']
+df = pd.DataFrame(table_data[2:], columns=table_data[0])
+df = df.drop(df.columns[-1], axis=1)
 
 # Save the DataFrame to a CSV file
 df.to_csv('nist_data.csv', index=False)
