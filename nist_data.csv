@@ -1,4 +1,4 @@
-At. num,Ion Charge,El. Name,Ground Shells (a),Ground Level,Ionization Energy (b) (eV),Uncertainty (c) (eV)
+At. Num,Ion Charge,El. Name,Ground Shells,Ground Level,Ionization Energy (eV),Uncertainty (eV)
 1,0,Hydrogen,1s,2S<1/2>,(13.598434599702),0.000000000012
 2,0,Helium,1s2,1S0,24.587389011,0.000000025
 2,+1,Helium,1s,2S<1/2>,(54.4177655282),0.0000000010
