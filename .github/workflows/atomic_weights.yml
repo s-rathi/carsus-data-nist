@@ -48,7 +48,7 @@ jobs:
           python atomic_weights.py
           
       - name: Compare changes
-        id: data_unchanged?
+        id: data_unchanged
         continue-on-error: true
         run: |
           git add .
