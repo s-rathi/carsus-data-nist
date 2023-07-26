@@ -68,7 +68,7 @@ for row in rows:
 table_data = [row for row in table_data if len(row) > 1]
 
 # Convert the table data into a DataFrame
-df = pd.DataFrame(table_data)
+df = pd.DataFrame(table_data[1:], columns=table_data[0])
 
 # Save the DataFrame to a CSV file
 df.to_csv('nist_data.csv', index=False)
