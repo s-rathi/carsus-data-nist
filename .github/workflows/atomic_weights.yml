@@ -1,0 +1,76 @@
+name: Check NIST atomic weights
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  #runs on every Sunday midnight
+  workflow_dispatch:
+  
+env:
+  ATOMIC_WEIGHTS_URL: 'http://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl'        #URL of the NIST ionization energies
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
+    steps:
+      - uses: act10ns/slack@v2.0.0
+        with:
+          status: starting
+          message: Starting check NIST atomic weights
+        if: always()
+        
+      - name: Checkout github repo
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Configure git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          
+      - name: Set up Python
+        id: set up python
+        uses: actions/setup-python@v3
+        
+      - name: Install dependencies
+        id: install dependencies
+        run: | 
+          pip install -r requirements.txt
+          pip install html5lib 
+        
+      - name: Run Python script
+        id: run python script to download the data
+        run: | 
+          python ionization.py
+          
+      - name: Compare changes
+        id: compare
+        continue-on-error: true
+        run: |
+          git add .
+          git diff --quiet --exit-code --cached
+
+      - name: Commit files to git
+        id: commit_changes
+        if: ${{ steps.compare.outcome == 'failure' }}
+        run: |
+          git commit -m "nist atomic weights added"
+
+      - name: Push changes
+        if: ${{ steps.compare.outcome == 'failure' }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          
+      - name: Report status 
+        uses: act10ns/slack@v2.0.0
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: always()
+          
