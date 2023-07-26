@@ -54,3 +54,22 @@ file_path = "NIST_ionization_data.txt"
 
 with open(file_path, "w") as file:
     file.write(pre_text_data)
+
+rows = pre_text_data.strip().split('\n')
+
+table_data = []
+for row in rows:
+    cells = row.split('|')
+    cleaned_cells = [cell.strip() for cell in cells]
+    table_data.append(cleaned_cells)
+
+# Remove empty rows
+table_data = [row for row in table_data if len(row) > 1]
+
+# Convert the table data into a DataFrame
+df = pd.DataFrame(table_data)
+
+# Save the DataFrame to a CSV file
+df.to_csv('nist_data.csv', index=False)
+
+print("Data extracted and saved to 'nist_data.csv'.")
