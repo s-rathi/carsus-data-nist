@@ -45,7 +45,7 @@ jobs:
       - name: Run Python script
         id: run python script to download the data
         run: | 
-          python ionization.py
+          python atomic_weights.py
           
       - name: Compare changes
         id: compare
