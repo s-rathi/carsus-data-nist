@@ -52,6 +52,7 @@ def parse_html_content(html_content):
 
 data = parse_html_content(download_weightscomp())
 df = pd.DataFrame(data)
+df = df.iloc[2:]
 
 # Save the DataFrame to CSV file
 df.to_csv('nist_atomic_weights.csv', index=False)
