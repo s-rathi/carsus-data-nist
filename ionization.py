@@ -71,6 +71,6 @@ def parse_html_content(html_file_path):
     return df
 
 file_path='ionization.html'
-csv_file_path='ionization.csv
+csv_file_path='ionization_energies.csv'
 ionization_data=parse_html_content(file_path)
 ionization_data.to_csv(csv_file_path, index=False) # Save the DataFrame to a CSV file    
