@@ -40,14 +40,19 @@ def download_ionization_energies(
 
     data = {k: v for k, v in data.items() if v is not False}
     data = {k:"on" if v is True else v for k, v in data.items()}
-
-   
+                
     r = requests.post(url=IONIZATION_ENERGIES_URL, data=data)
     return r.text
 
-def parse_html_content(html_file_path):
-    
-    html_data=download_ionization_energies()
+def check_folders(folder_name, file_name):
+    if not os.path.exists(folder_name):  # to check if the folder exists, and create it if not
+        os.makedirs(folder_name)
+
+    file_path = os.path.join(folder_name, file_name)
+    return file_path
+        
+def parse_html_content(html_data):
+    html_file_path = check_folders('html_files', 'ionization_energis.html')
     with open(html_file_path, "w", encoding="utf-8") as file:  # Save the html data to a file
         file.write(html_data)
     
@@ -65,12 +70,12 @@ def parse_html_content(html_file_path):
     
     table_data = [row for row in table_data if len(row) > 1] # Remove empty rows
 
-    column=['At. Num', 'Ion Charge', 'El. Name', 'Ground Shells', 'Ground Level', 'Ionization Energy (eV)', 'Uncertainty (eV)','x']
+    column = ['At. Num', 'Ion Charge', 'El. Name', 'Ground Shells', 'Ground Level', 'Ionization Energy (eV)', 'Uncertainty (eV)','x']
     df = pd.DataFrame(table_data[2:], columns=column)
     df = df.drop(df.columns[-1], axis=1)
-    return df
 
-file_path='ionization.html'
-csv_file_path='ionization_energies.csv'
-ionization_data=parse_html_content(file_path)
-ionization_data.to_csv(csv_file_path, index=False) # Save the DataFrame to a CSV file    
+    csv_file_path = check_folders('nist_data', 'ionization_energies.csv')
+    df.to_csv(csv_file_path, index=False)
+    return
+
+ionization_energies = parse_html_content(download_ionization_energies())
