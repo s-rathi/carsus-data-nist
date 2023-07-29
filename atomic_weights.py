@@ -32,18 +32,13 @@ def download_weightscomp(ascii='ascii2', isotype='some'):
     pre_text_data = pre_text_data.replace(u'\xa0', u' ')  # replace non-breaking spaces with spaces
     return pre_text_data
 
-# Save the html content
-def save_html(html_file_path):
-    html_content=download_weightscomp()
-    with open(html_file_path, "w", encoding="utf-8") as file:  # Save the html data to a file
-        file.write(html_content)
-    return file 
-
+# Save html data
 html_file_path='weights.html'
-weights_html=save_html(html_file_path)
+with open(html_file_path, "w", encoding="utf-8") as file:   # Save the html data to a file
+    file.write(download_weightscomp())
 
 # Format the data
-def parse_html_content(html_content):
+def parse_html_content(html_content):        
     data = []
     lines = html_content.strip().split('\n')
     entry = {}
