@@ -16,11 +16,11 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
     steps:
-  #    - uses: act10ns/slack@v2.0.0
-  #      with:
-  #        status: starting
-  #        message: Starting check NIST atomic weights
-  #      if: always()
+     # - uses: act10ns/slack@v2.0.0
+      #  with:
+       #   status: starting
+       #   message: Starting check NIST atomic weights
+       # if: always()
         
       - name: Checkout github repo
         uses: actions/checkout@v3
@@ -45,10 +45,10 @@ jobs:
       - name: Run Python script
         id: run_script
         run: | 
-          python atomic_weights.py
+          python weights.py
           
       - name: Compare changes
-        id: data_unchanged
+        id: compare
         continue-on-error: true
         run: |
           git add .
@@ -67,8 +67,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
           
-  #    - name: Report status 
-   #     uses: act10ns/slack@v2.0.0
+   #   - name: Report status 
+   #    uses: act10ns/slack@v2.0.0
    #     with:
    #       status: ${{ job.status }}
    #       steps: ${{ toJson(steps) }}
