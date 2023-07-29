@@ -31,26 +31,22 @@ def download_weightscomp(ascii='ascii2', isotype='some'):
     soup = BeautifulSoup(r.text, 'html5lib')
     pre_text_data = soup.pre.get_text()
     pre_text_data = pre_text_data.replace(u'\xa0', u' ')  # replace non-breaking spaces with spaces
+    return pre_text_data
 
-    folder_name = 'html_files'
-    file_name = 'weights.html'
-
+# Check and create a path to save files
+def check_folders(folder_name, file_name)
     if not os.path.exists(folder_name):  # to check if the folder exists, and create it if not
         os.makedirs(folder_name)
 
-    html_file_path = os.path.join(folder_name, file_name)
-
-    with open(html_file_path, "w", encoding="utf-8") as file:   # Save the html data to a file
-        file.write(pre_text_data)
-    return pre_text_data
-
+    file_path = os.path.join(folder_name, file_name)
+    return file_path
+    
 # Format the data
 def parse_html_content(html_content):
-    #html_content=download_weightscomp()
-    
-    #with open(html_file_path, "w", encoding="utf-8") as file:   # Save the html data to a file
-     #   file.write(html_content)
-    
+    html_file_path = check_folders('html_files', 'weights.html')
+    with open(html_file_path, "w", encoding="utf-8") as file:   # Save the html data to a file
+        file.write(html_content)
+        
     data = []
     lines = html_content.strip().split('\n')
     entry = {}
@@ -66,12 +62,9 @@ def parse_html_content(html_content):
     data.append(entry)  # Append the last entry    
     df = pd.DataFrame(data)
     df = df.iloc[2:]
-    return df
 
-csv_folder_name = 'nist_data'
-csv_file_name = 'weights.csv'
-csv_file_path = os.path.join(csv_folder_name, csv_file_name)
-
-# Save the DataFrame to CSV file
-df=parse_html_content(download_weightscomp())
-df.to_csv(csv_file_path, index=False)
+    csv_file_path = check_folders('nist_data', 'weights.csv')
+    df.to_csv(csv_file_path, index=False)
+    return
+        
+atomic_weights = parse_html_content(download_weightscomp())
