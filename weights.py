@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
+import os
 
 # Download data
 WEIGHTSCOMP_URL = "http://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl"
@@ -31,7 +32,14 @@ def download_weightscomp(ascii='ascii2', isotype='some'):
     pre_text_data = soup.pre.get_text()
     pre_text_data = pre_text_data.replace(u'\xa0', u' ')  # replace non-breaking spaces with spaces
 
-    html_file_path='html_files.weights.html'
+    folder_name = 'html_files'
+    file_name = 'weights.html'
+
+    if not os.path.exists(folder_name):  # to check if the folder exists, and create it if not
+        os.makedirs(folder_name)
+
+    html_file_path = os.path.join(folder_name, file_name)
+
     with open(html_file_path, "w", encoding="utf-8") as file:   # Save the html data to a file
         file.write(pre_text_data)
     return pre_text_data
@@ -60,9 +68,9 @@ def parse_html_content(html_content):
     df = df.iloc[2:]
     return df
 
-# Define the paths
-#html_file_path='weights.html'
-csv_file_path='nist_data.nist_atomic_weights_new.csv'
+csv_folder_name = 'nist_data'
+csv_file_name = 'weights.csv'
+csv_file_path = os.path.join(csv_folder_name, csv_file_name)
 
 # Save the DataFrame to CSV file
 df=parse_html_content(download_weightscomp())
