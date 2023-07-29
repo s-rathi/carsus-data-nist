@@ -34,7 +34,7 @@ def download_weightscomp(ascii='ascii2', isotype='some'):
     return pre_text_data
 
 # Check and create a path to save files
-def check_folders(folder_name, file_name)
+def check_folders(folder_name, file_name):
     if not os.path.exists(folder_name):  # to check if the folder exists, and create it if not
         os.makedirs(folder_name)
 
