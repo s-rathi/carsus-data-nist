@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import os
 
 IONIZATION_ENERGIES_URL = 'https://physics.nist.gov/cgi-bin/ASD/ie.pl'
 
@@ -52,7 +53,7 @@ def check_folders(folder_name, file_name):
     return file_path
         
 def parse_html_content(html_data):
-    html_file_path = check_folders('html_files', 'ionization_energis.html')
+    html_file_path = check_folders('html_files', 'ionization_energies.html')
     with open(html_file_path, "w", encoding="utf-8") as file:  # Save the html data to a file
         file.write(html_data)
     
