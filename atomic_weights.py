@@ -31,7 +31,7 @@ def download_weightscomp(ascii='ascii2', isotype='some'):
     pre_text_data = soup.pre.get_text()
     pre_text_data = pre_text_data.replace(u'\xa0', u' ')  # replace non-breaking spaces with spaces
 
-    html_file_path='weights.html'
+    html_file_path='html_files.weights.html'
     with open(html_file_path, "w", encoding="utf-8") as file:   # Save the html data to a file
         file.write(pre_text_data)
     return pre_text_data
@@ -62,7 +62,7 @@ def parse_html_content(html_content):
 
 # Define the paths
 #html_file_path='weights.html'
-csv_file_path='nist_atomic_weights_new.csv'
+csv_file_path='nist_data.nist_atomic_weights_new.csv'
 
 # Save the DataFrame to CSV file
 df=parse_html_content(download_weightscomp())
