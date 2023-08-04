@@ -42,7 +42,7 @@ jobs:
             use-mamba: true
 
       - name: Install package
-        run: pip install -e .
+        run: pip install -e carsus
 
       - name: Configure git
         run: |
