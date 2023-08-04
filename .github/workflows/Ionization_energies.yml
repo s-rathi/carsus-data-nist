@@ -48,7 +48,7 @@ jobs:
         
       - name: Install package
        # run: pip install -e - name: Install package from URL
-        run:
+        run: |
           cd carsus
           pip install -e .
         
