@@ -51,11 +51,12 @@ jobs:
     
       - name: Set up 
         id: python_setup
-        run: conda activate carsus
+        run: |
+          conda install --file environment.yml
         
-      - name: Run Python script
-        run: | 
-          python ionization.py
+     # - name: Run Python script
+     #   run: | 
+     #     python ionization.py
 
       - name: Run Python script
         id: run_script
