@@ -45,12 +45,10 @@ jobs:
             environment-file: carsus/carsus_env3.yml
             activate-environment: carsus
             use-mamba: true
-
-      - name: Uninstall package
-        run: pip uninstall -y carsus
         
       - name: Install package
-        run: pip install -e carsus --user
+       # run: pip install -e - name: Install package from URL
+        run: pip install -e git+https://github.com/tardis-sn/carsus.git#egg=carsus --user --user
 
       - name: Configure shell for Conda
         run: conda init bash 
