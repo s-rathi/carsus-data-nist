@@ -22,11 +22,6 @@ jobs:
         #  message: Starting NIST ionization energies
         #if: always()
 
-      - name: Checkout github repo
-        uses: actions/checkout@v3
-        with:
-          persist-credentials: true
-
       - name: Clone tardis-sn/carsus-db
         uses: actions/checkout@v3
         with:
@@ -45,6 +40,11 @@ jobs:
 
       - name: Install package
         run: pip install -e .
+
+      - name: Checkout github repo
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: true
 
       - name: Configure git
         run: |
