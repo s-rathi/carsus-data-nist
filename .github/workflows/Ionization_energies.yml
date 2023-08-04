@@ -49,9 +49,14 @@ jobs:
        # run: pip install -e - name: Install package from URL
     #    run: pip install -e .
     
-      - name: Install Conda packages
+      - name: Activate Conda Environment and Run Command
         run: |
-          conda env update -n carsus -f carsus_env3.yml
+          # Activate the conda environment and run your command
+          source "$CONDA/etc/profile.d/conda.sh"
+          conda activate carsus
+          
+          # Now you can run your command, e.g., printing the Conda environment name
+          echo "Conda environment: $CONDA_DEFAULT_ENV"
         
      # - name: Run Python script
      #   run: | 
@@ -60,7 +65,7 @@ jobs:
       - name: Run Python script
         id: run_script
         run: | 
-          python weights.py
+          python3 weights.py
           
       - name: Compare changes
         id: compare
