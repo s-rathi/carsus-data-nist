@@ -22,11 +22,14 @@ jobs:
         #  message: Starting NIST ionization energies
         #if: always()
 
-      - name: Clone tardis-sn/carsus-db
+      - name: Checkout github repo
+        uses: actions/checkout@v3
+
+      - name: Clone tardis-sn/carsus
         uses: actions/checkout@v3
         with:
           repository: tardis-sn/carsus
-          path: https://github.com/tardis-sn/carsus.git
+          path: carsus
           lfs: false  # do not pull LFS objects
 
       - name: Setup environment
@@ -40,11 +43,6 @@ jobs:
 
       - name: Install package
         run: pip install -e .
-
-      - name: Checkout github repo
-        uses: actions/checkout@v3
-        with:
-          persist-credentials: true
 
       - name: Configure git
         run: |
