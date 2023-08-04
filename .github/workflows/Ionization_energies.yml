@@ -47,20 +47,14 @@ jobs:
             use-mamba: true
 
       - name: Install package
-        run: pip install -e carsus --prefix=carsus-data-nist
+        run: pip install -e carsus
 
       - name: Configure shell for Conda
         run: conda init bash 
-
-      - name: Activate environment
-        run: conda activate carsus
-          
-      - name: Set up Python
-        uses: actions/setup-python@v3
         
       - name: Run Python script
         run: | 
-          python ionization.py
+          conda run -n carsus python ionization.py
 
       - name: Run Python script
         id: run_script
