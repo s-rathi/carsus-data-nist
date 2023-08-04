@@ -47,7 +47,7 @@ jobs:
             use-mamba: true
 
       - name: Install package
-        run: pip install -e carsus --user --prefix=
+        run: pip install -e carsus --user --prefix=carsus-data-nist
           
       - name: Set up Python
         uses: actions/setup-python@v3
