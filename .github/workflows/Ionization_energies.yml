@@ -54,10 +54,6 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v3
         
-      - name: Install dependencies
-        run: | 
-          pip install -r requirements.txt
-        
       - name: Run Python script
         run: | 
           python ionization.py
