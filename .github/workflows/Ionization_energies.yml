@@ -36,6 +36,7 @@ jobs:
           repository: tardis-sn/carsus
           path: carsus
           lfs: false  # do not pull LFS objects
+          ref: main
 
       - name: Setup environment
         uses: conda-incubator/setup-miniconda@v2
