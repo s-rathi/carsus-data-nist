@@ -46,7 +46,7 @@ jobs:
         with:
             miniforge-variant: Mambaforge
             miniforge-version: latest
-            environment-file: carsus/carsus_env3.yml
+            environment-file: carsus_env3.yml
             activate-environment: carsus
             use-mamba: true
         
