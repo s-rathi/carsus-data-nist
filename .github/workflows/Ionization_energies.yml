@@ -47,7 +47,7 @@ jobs:
             use-mamba: true
 
       - name: Install package
-        run: pip install -e carsus
+        run: pip install -e carsus --user
 
       - name: Configure shell for Conda
         run: conda init bash 
