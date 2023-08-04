@@ -48,14 +48,13 @@ jobs:
         
       - name: Install package
        # run: pip install -e - name: Install package from URL
-        run: pip install -e git+https://github.com/tardis-sn/carsus.git#egg=carsus --user
-
-      - name: Configure shell for Conda
-        run: conda init bash 
+        run:
+          cd carsus
+          pip install -e .
         
       - name: Run Python script
         run: | 
-          conda run -n carsus python ionization.py
+          python ionization.py
 
       - name: Run Python script
         id: run_script
