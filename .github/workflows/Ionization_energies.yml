@@ -46,6 +46,9 @@ jobs:
             activate-environment: carsus
             use-mamba: true
 
+      - name: Uninstall package
+        run: pip uninstall -y carsus
+        
       - name: Install package
         run: pip install -e carsus --user
 
