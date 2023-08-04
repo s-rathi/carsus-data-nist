@@ -49,10 +49,9 @@ jobs:
        # run: pip install -e - name: Install package from URL
     #    run: pip install -e .
     
-    #  - name: Set up 
-     #   id: python_setup
-      #  run: |
-       #   conda install --file carsus_env3.yml
+      - name: Install Conda packages
+        run: |
+          conda env update -n carsus -f carsus_env3.yml
         
      # - name: Run Python script
      #   run: | 
