@@ -49,9 +49,9 @@ jobs:
        # run: pip install -e - name: Install package from URL
     #    run: pip install -e .
     
-      - name: Set up Python
+      - name: Set up 
         id: python_setup
-        uses: actions/setup-python@v3
+        run: conda activate carsus
         
       - name: Run Python script
         run: | 
