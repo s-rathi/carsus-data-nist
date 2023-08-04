@@ -48,7 +48,7 @@ jobs:
         
       - name: Install package
        # run: pip install -e - name: Install package from URL
-        run: pip install -e git+https://github.com/tardis-sn/carsus.git#egg=carsus --user --user
+        run: pip install -e git+https://github.com/tardis-sn/carsus.git#egg=carsus --user
 
       - name: Configure shell for Conda
         run: conda init bash 
