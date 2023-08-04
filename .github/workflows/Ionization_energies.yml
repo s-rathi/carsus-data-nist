@@ -45,9 +45,9 @@ jobs:
             activate-environment: carsus
             use-mamba: true
         
-      - name: Install package
+   #   - name: Install package
        # run: pip install -e - name: Install package from URL
-        run: pip install -e .
+    #    run: pip install -e .
         
       - name: Run Python script
         run: | 
