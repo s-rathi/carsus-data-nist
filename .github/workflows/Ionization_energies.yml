@@ -30,7 +30,7 @@ jobs:
       - name: Clone tardis-sn/carsus-db
         uses: actions/checkout@v3
         with:
-          repository: https://github.com/tardis-sn/carsus.git
+          repository: tardis-sn/carsus
           path: https://github.com/tardis-sn/carsus.git
           lfs: false  # do not pull LFS objects
 
