@@ -52,7 +52,7 @@ jobs:
       - name: Set up 
         id: python_setup
         run: |
-          conda install --file environment.yml
+          conda install --file carsus/environment.yml
         
      # - name: Run Python script
      #   run: | 
