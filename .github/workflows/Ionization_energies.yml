@@ -49,6 +49,9 @@ jobs:
       - name: Install package
         run: pip install -e carsus --prefix=carsus-data-nist
 
+      - name: Configure shell for Conda
+        run: conda init bash 
+
       - name: Activate environment
         run: conda activate carsus
           
