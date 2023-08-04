@@ -47,15 +47,13 @@ jobs:
         with:
             miniforge-variant: Mambaforge
             miniforge-version: latest
-            environment-file: carsus_env3.yml
+            environment-file: carsus/carsus_env3.yml
             activate-environment: carsus
             use-mamba: true
         
       - name: Install package
        # run: pip install -e - name: Install package from URL
-        run: |
-          cd carsus
-          pip install -e .
+        run: pip install -e .
         
       - name: Run Python script
         run: | 
