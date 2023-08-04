@@ -21,6 +21,25 @@ jobs:
        #   status: starting
         #  message: Starting NIST ionization energies
         #if: always()
+
+      - name: Clone tardis-sn/carsus-db
+        uses: actions/checkout@v2
+        with:
+          repository: tardis-sn/carsus-db
+          path: carsus-db
+          lfs: false  # do not pull LFS objects
+
+      - name: Setup environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+            miniforge-variant: Mambaforge
+            miniforge-version: latest
+            environment-file: carsus_env3.yml
+            activate-environment: carsus
+            use-mamba: true
+
+      - name: Install package
+        run: pip install -e .
         
       - name: Checkout github repo
         uses: actions/checkout@v3
