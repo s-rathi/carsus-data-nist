@@ -48,25 +48,21 @@ jobs:
             activate-environment: carsus
             use-mamba: true
         
-   #   - name: Install package
-       # run: pip install -e - name: Install package from URL
-    #    run: pip install -e .
-    
       - name: Activate Conda Environment and Run Command
         run: |
           source "$CONDA/etc/profile.d/conda.sh"
           conda activate carsus
           echo "Conda environment: $CONDA_DEFAULT_ENV"
-          python weights.py
-        
-     # - name: Run Python script
-     #   run: | 
-     #     python ionization.py
+    
+      - name: Run Python script
+        id: run_ionization_script
+        run: | 
+          python ionization.py
 
       - name: Run Python script
-        id: run_script
+        id: run_weights_script
         run: | 
-          python3 weights.py
+          python weights.py
           
       - name: Compare changes
         id: compare
