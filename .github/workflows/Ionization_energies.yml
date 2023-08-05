@@ -44,9 +44,15 @@ jobs:
         with:
             miniforge-variant: Mambaforge
             miniforge-version: latest
-            environment-file: carsus_env3.yml
+            environment-file: carsus/carsus_env3.yml
             activate-environment: carsus
             use-mamba: true
+
+      - name: Activate environment
+        run: |
+          source "$CONDA/etc/profile.d/conda.sh"
+          conda activate carsus
+          echo "Conda environment: $CONDA_DEFAULT_ENV"
     
       - name: Run Python script
         id: run_ionization_script
