@@ -47,12 +47,6 @@ jobs:
             environment-file: carsus_env3.yml
             activate-environment: carsus
             use-mamba: true
-        
-      - name: Activate Conda Environment and Run Command
-        run: |
-          source "$CONDA/etc/profile.d/conda.sh"
-          conda activate carsus
-          echo "Conda environment: $CONDA_DEFAULT_ENV"
     
       - name: Run Python script
         id: run_ionization_script
