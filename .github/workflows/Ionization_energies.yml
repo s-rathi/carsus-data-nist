@@ -84,4 +84,8 @@ jobs:
    #       status: ${{ job.status }}
    #       steps: ${{ toJson(steps) }}
    #     if: always()
+
+   #  source "$CONDA/etc/profile.d/conda.sh"
+  # conda activate carsus
+  # echo "Conda environment: $CONDA_DEFAULT_ENV"
           
