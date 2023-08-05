@@ -1,6 +1,6 @@
 import requests
 import carsus
-from carsus.carsus.io.nist.ionization import download_ionization_energies
+from carsus.io.nist.ionization import download_ionization_energies
 from beautifulsoup4 import BeautifulSoup
 import pandas as pd
 import os
