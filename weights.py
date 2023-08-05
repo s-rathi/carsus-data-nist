@@ -5,36 +5,6 @@ import os
 from carsus.carsus.io.nist.weightscomp import download_weightscomp
 
 
-# Download data
-WEIGHTSCOMP_URL = "http://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl"
-
-def download_weightscomp(ascii='ascii2', isotype='some'):
-    """
-    Downloader function for the NIST Atomic Weights and Isotopic Compositions database
-
-    Makes a GET request to download data; then extracts preformatted text
-
-    Parameters
-    ----------
-    ascii: str
-        GET request parameter, refer to the NIST docs
-        (default: 'ascii')
-    isotype: str
-        GET request parameter, refer to the NIST docs
-        (default: 'some')
-
-    Returns
-    -------
-    str
-        Preformatted text data
-
-    """
-    r = requests.get(url=WEIGHTSCOMP_URL, params={'ascii': ascii, 'isotype': isotype})
-    soup = BeautifulSoup(r.text, 'html5lib')
-    pre_text_data = soup.pre.get_text()
-    pre_text_data = pre_text_data.replace(u'\xa0', u' ')  # replace non-breaking spaces with spaces
-    return pre_text_data
-
 # Check and create a path to save files
 def check_folders(folder_name, file_name):
     if not os.path.exists(folder_name):  # to check if the folder exists, and create it if not
