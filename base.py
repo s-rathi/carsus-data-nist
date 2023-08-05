@@ -2,7 +2,7 @@ import os
 import logging
 import pandas as pd
 #import carsus
-from carsus.carsus.model.atomic import Atom, setup
+#from carsus.carsus.model.atomic import Atom, setup
 
 logger = logging.getLogger(__name__)
 
