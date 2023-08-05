@@ -48,10 +48,10 @@ jobs:
             activate-environment: carsus
             use-mamba: true
     
-   #   - name: Run Python script
-    #    id: run_ionization_script
-     #   run: | 
-      #    python ionization.py
+      - name: Run Python script
+        id: run_ionization_script
+        run: | 
+          python ionization.py
 
       - name: Run Python script
         id: run_weights_script
