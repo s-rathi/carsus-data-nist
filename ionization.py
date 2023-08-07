@@ -33,7 +33,7 @@ def parse_html_content(html_data):
     
     table_data = [row for row in table_data if len(row) > 1] # Remove empty rows
 
-    column = ['At. Num', 'Ion Charge', 'El. Name', 'Ground Shells', 'Ground Level', 'Ionization Energy (eV)', 'Uncertainty (eV)','x']
+    column = ['At. Num', 'Ion Charge', 'Ground Shells', 'Ground Level', 'Ionization Energy (eV)', 'Uncertainty (eV)', 'x']
     df = pd.DataFrame(table_data[2:], columns=column)
     df = df.drop(df.columns[-1], axis=1)
 
