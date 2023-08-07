@@ -1,4 +1,4 @@
-name: Check NIST ionization energies
+name: Check NIST workflow
 
 on:
   schedule:
@@ -47,6 +47,10 @@ jobs:
             environment-file: carsus/carsus_env3.yml
             activate-environment: carsus
             use-mamba: true
+
+      - name: Set up Python
+        id: python_setup
+        uses: actions/setup-python@v3
     
       - name: Run Python script
         id: run_ionization_script
