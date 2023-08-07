@@ -49,13 +49,9 @@ jobs:
             use-mamba: true
 
       - name: Install package
-        run: pip install -e ./carsus
+        run: pip install ./carsus
 
-      - name: Set up Python
-        id: python_setup
-        uses: actions/setup-python@v3
-    
-      - name: Run Python script
+       - name: Run Python script
         id: run_ionization_script
         run: | 
           python ionization.py
