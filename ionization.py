@@ -4,7 +4,7 @@ import pandas as pd
 import os
 from carsus.carsus.io.nist.ionization import download_ionization_energies
 
-IONIZATION_ENERGIES_URL = 'https://physics.nist.gov/cgi-bin/ASD/ie.pl'
+#IONIZATION_ENERGIES_URL = 'https://physics.nist.gov/cgi-bin/ASD/ie.pl'
 
 def check_folders(folder_name, file_name):
     if not os.path.exists(folder_name):  # to check if the folder exists, and create it if not
