@@ -48,6 +48,9 @@ jobs:
             activate-environment: carsus
             use-mamba: true
 
+      - name: Install package
+        run: pip install carsus
+
       - name: Set up Python
         id: python_setup
         uses: actions/setup-python@v3
