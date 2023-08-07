@@ -51,10 +51,10 @@ jobs:
       - name: Install package
         run: pip install ./carsus
 
-    #  - name: Run Python script
-    #    id: run_ionization_script
-    #    run: | 
-    #      python ionization.py
+      - name: Run Python script
+        id: run_ionization_script
+        run: | 
+          python ionization.py
 
       - name: Run Python script
         id: run_weights_script
