@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 from bs4 import BeautifulSoup
 import os
-from carsus.carsus.io.nist.weightscomp import download_weightscomp
+from carsus.io.nist.weightscomp import download_weightscomp
 
 
 # Check and create a path to save files
