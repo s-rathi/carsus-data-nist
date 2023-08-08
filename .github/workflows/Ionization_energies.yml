@@ -61,7 +61,7 @@ jobs:
         continue-on-error: true
         run: |
           git add .
-          git rm --cached carsus
+          git rm --cached -f carsus
           git diff --quiet --exit-code --cached
 
       - name: Commit files to git
