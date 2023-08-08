@@ -60,7 +60,8 @@ jobs:
         id: compare
         continue-on-error: true
         run: |
-          git add ionization_energies.html ionization_energies.csv
+          git rm --cached carsus
+          git add .
           git diff --quiet --exit-code --cached
 
       - name: Commit files to git
