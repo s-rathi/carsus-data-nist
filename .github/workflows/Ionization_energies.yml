@@ -48,7 +48,7 @@ jobs:
             use-mamba: true
 
       - name: Install carsus
-        id: install carsus
+        id: install_carsus
         run: pip install ./carsus
                      
       - name: Run Python ionization energies script
