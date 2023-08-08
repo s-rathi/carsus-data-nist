@@ -1,4 +1,4 @@
-name: Check NIST ionization energies and atomic weights
+name: Check NIST workflow
 
 on:
   schedule:
