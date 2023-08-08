@@ -1,4 +1,4 @@
-name: Check NIST ionization energies
+name: Check NIST workflow
 
 on:
   schedule:
@@ -6,39 +6,38 @@ on:
   workflow_dispatch:
   
 env:
-  IONIZATION_ENERGIES_URL: 'https://physics.nist.gov/cgi-bin/ASD/ie.pl'        #URL of the NIST ionization energies
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
 
 jobs:
   build:
-    runs-on: ubuntu-latest
 
-    steps:    
+    defaults:
+       run:
+         shell: bash -l {0}
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+     # - uses: act10ns/slack@v2.0.0
+      #  with:
+       #   status: starting
+        #  message: Starting NIST ionization energies
+        #if: always()
+
       - name: Checkout github repo
         uses: actions/checkout@v3
-        with:
-          persist-credentials: false
 
       - name: Configure git
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          
-      - name: Set up Python
-        uses: actions/setup-python@v3
-        
-      - name: Install Jupyter
-        run: pip install jupyter
-        
-      - name: Install dependencies
-        run: | 
-          pip install -r requirements.txt
-          pip install html5lib 
 
-   #   - name: Convert Jupyter Notebook to HTML
-   #     run: jupyter nbconvert --to html ionization.ipynb
-        
+      - name: Install package
+        run: pip install git+https://github.com/tardis-sn/carsus
+
       - name: Run Python script
+        id: run_ionization_script
         run: | 
           python ionization.py
           
@@ -61,4 +60,11 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
+          
+   #   - name: Report status 
+   #     uses: act10ns/slack@v2.0.0
+   #     with:
+   #       status: ${{ job.status }}
+   #       steps: ${{ toJson(steps) }}
+   #     if: always()
           
