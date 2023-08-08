@@ -33,6 +33,21 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
 
+      - name: Clone tardis-sn/carsus
+        uses: actions/checkout@v3
+        with:
+          repository: tardis-sn/carsus
+          path: carsus
+
+      - name: Setup environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+            miniforge-variant: Mambaforge
+            miniforge-version: latest
+            environment-file: carsus/carsus_env3.yml
+            activate-environment: carsus
+            use-mamba: true
+
       - name: Install package
         run: pip install git+https://github.com/tardis-sn/carsus
 
