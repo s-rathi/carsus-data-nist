@@ -55,6 +55,11 @@ jobs:
         id: run_ionization_script
         run: | 
           python ionization.py
+
+      - name: Run Python script
+        id: run_script
+        run: | 
+          python atomic_weights.py
           
       - name: Compare changes
         id: compare
