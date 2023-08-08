@@ -60,8 +60,8 @@ jobs:
         id: compare
         continue-on-error: true
         run: |
-          git rm --cached carsus
           git add .
+          git rm --cached carsus
           git diff --quiet --exit-code --cached
 
       - name: Commit files to git
