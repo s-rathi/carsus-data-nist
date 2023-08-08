@@ -27,8 +27,6 @@ jobs:
 
       - name: Checkout github repo
         uses: actions/checkout@v3
-        with:
-          persist-credentials: false
 
       - name: Configure git
         run: |
