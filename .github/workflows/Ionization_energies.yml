@@ -49,7 +49,7 @@ jobs:
             use-mamba: true
 
       - name: Install package
-        run: pip install git+https://github.com/tardis-sn/carsus
+        run: pip install ./carsus
 
       - name: Run Python script
         id: run_ionization_script
@@ -66,7 +66,7 @@ jobs:
         continue-on-error: true
         run: |
           git add .
-          git rm --cached -f carsus
+          git rm --cached carsus
           git diff --quiet --exit-code --cached
 
       - name: Commit files to git
