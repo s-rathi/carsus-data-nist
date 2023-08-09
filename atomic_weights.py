@@ -1,8 +1,10 @@
-import requests
-import pandas as pd
-from bs4 import BeautifulSoup
 import os
+
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
 from carsus.io.nist.weightscomp import download_weightscomp
+
 
 # Check and create a path to save files
 def check_folders(folder_name, file_name):
