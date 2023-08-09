@@ -65,8 +65,8 @@ jobs:
         id: compare
         continue-on-error: true
         run: |
-          git add .
-          git rm --cached carsus
+          git add html_files/weights.html html_files/ionization_energies.html nist_data/weights.csv
+          #git rm --cached carsus
           git diff --quiet --exit-code --cached
 
       - name: Commit files to git
