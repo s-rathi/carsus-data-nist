@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-from general import check_folders
+from common_utlis import check_folders
 from carsus.io.nist.ionization import download_ionization_energies
 
         
