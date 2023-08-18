@@ -1,0 +1,90 @@
+name: Check NIST ionization energies and atomic weights
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  #runs on every Sunday midnight
+  workflow_dispatch:
+  
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
+jobs:
+  build:
+    
+    defaults:
+     run:
+       shell: bash -l {0}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: act10ns/slack@v2.0.0
+        with:
+          status: starting
+          message: Starting to check NIST data
+        if: always()
+        
+      - name: Checkout github repo
+        uses: actions/checkout@v3
+
+      - name: Configure git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Clone tardis-sn/carsus
+        uses: actions/checkout@v3
+        with:
+          repository: tardis-sn/carsus
+          path: carsus
+
+      - name: Setup environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+            miniforge-variant: Mambaforge
+            miniforge-version: latest
+            environment-file: carsus/carsus_env3.yml
+            activate-environment: carsus
+            use-mamba: true
+
+      - name: Install carsus
+        id: install_carsus
+        run: pip install ./carsus
+                     
+      - name: Run Python ionization energies script
+        id: run_ionization_energies_script
+        run: | 
+          python ionization.py
+
+      - name: Run Python atomic weights script 
+        id: run_atomic_weights_script
+        run: | 
+          python atomic_weights.py
+          
+      - name: Compare changes
+        id: compare
+        continue-on-error: true
+        run: |
+          git add html_files/weights.html html_files/ionization_energies.html nist_data/weights.csv nist_data/ionization_energies.csv
+          git diff --quiet --exit-code --cached
+
+      - name: Commit files to git
+        id: commit_changes
+        if: ${{ steps.compare.outcome == 'failure' }}
+        run: |
+          git commit -m "nist ionization energies and atomic weights added"
+
+      - name: Push changes
+        if: ${{ steps.compare.outcome == 'failure' }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          
+      - name: Report status 
+        uses: act10ns/slack@v2.0.0
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: always()
+          
