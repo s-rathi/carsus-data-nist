@@ -51,15 +51,11 @@ jobs:
         id: run_ionization_energies_script
         run: | 
           python ionization.py
-        env:
-          PYTHONPATH: ${{ github.workspace }}
 
       - name: Run Python atomic weights script 
         id: run_atomic_weights_script
         run: | 
           python atomic_weights.py
-        env:
-          PYTHONPATH: ${{ github.workspace }}
                     
       - name: Compare changes
         id: compare
@@ -80,5 +76,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
-          
           
