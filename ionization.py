@@ -41,4 +41,4 @@ def parse_ionization_html_content(html_data):
     return
 
 if __name__ == "__main__":
-        ionization_energies = parse_ionization_html_content(download_ionization_energies())
+        ionization_energies = parse_ionization_html_content(download_ionization_energies(nist_url=True))
