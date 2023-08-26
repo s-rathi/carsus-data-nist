@@ -42,4 +42,4 @@ def parse_weights_html_content(html_content):
     return
 
 if __name__ == "__main__":
-    atomic_weights = parse_weights_html_content(download_weightscomp(nist_url=True))
+    atomic_weights = parse_weights_html_content(download_weightscomp())
